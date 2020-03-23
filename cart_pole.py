@@ -41,10 +41,12 @@ num_of_search = 1000
 
 env = gym.make('CartPole-v0')
 num_episodes_per_search = []
-for i in range(num_of_search):
-    print(i)
+for _ in range(num_of_search):
     num_episodes = random_search_train(env, episode_length, num_of_episodes)
     num_episodes_per_search.append(num_episodes)
+env.close()
 
+print("The average number of episodes required until the score is 200 is: " + str(np.average(num_episodes_per_search)))
 plt.hist(num_episodes_per_search)
-plt.savefig('hist.png', dpi=100)
+plt.savefig('hist_of_num_episodes_per_search.png')
+print("The histogram of number of episodes per search was saved in the local folder with the name hist_of_num_episodes_per_search.png")
